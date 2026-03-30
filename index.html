@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memescope Monday — Beginner Friendly 🌱</title>
+
+<!-- ============================================================
+     🔧 EASY CONFIG — swap these values when your token is live
+     ============================================================ -->
+<script>
+  const CONFIG = {
+    BUY_LINK: "https://pump.fun/profile/thedevtom10",   // ← swap to your pump.fun token URL
+    CONTRACT_ADDRESS: "COMING SOON",                      // ← paste CA here once live
+    TICKER: "$Beginner",                                  // ← your token ticker
+    CHART_LINK: "https://pump.fun/profile/thedevtom10",  // ← dexscreener / birdeye link
+    TWITTER_LINK: "https://x.com/i/communities/2038635939350659349", // ← your Twitter/X link
+    TELEGRAM_LINK: "#",                                   // ← your Telegram link
+  };
+</script>
+<!-- ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --yellow: #FFD93D;
+    --yellow-dark: #F4B400;
+    --pink: #FF8FAB;
+    --pink-light: #FFD6E0;
+    --green: #6BCB77;
+    --green-dark: #4D9A57;
+    --sky: #A8EDFF;
+    --sky-dark: #5BC8F5;
+    --purple: #C9B1FF;
+    --white: #FFFEF7;
+    --dark: #1A1A2E;
+    --text: #3D2B1F;
+    --rainbow1: #FF6B6B;
+    --rainbow2: #FFD93D;
+    --rainbow3: #6BCB77;
+    --rainbow4: #5BC8F5;
+    --rainbow5: #C9B1FF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23FFD93D' stroke='%23F4B400' stroke-width='2'/%3E%3Ccircle cx='9' cy='10' r='1.5' fill='%231A1A2E'/%3E%3Ccircle cx='15' cy='10' r='1.5' fill='%231A1A2E'/%3E%3Cpath d='M9 15 Q12 18 15 15' stroke='%231A1A2E' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") 12 12, auto;
+  }
+
+  /* ── FLOATING PARTICLES ── */
+  #particles {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    animation: float-up linear infinite;
+    opacity: 0.6;
+  }
+  @keyframes float-up {
+    0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.6; }
+    90%  { opacity: 0.6; }
+    100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #AEE6FF 0%, #D4F5C4 50%, #FFF9C4 100%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  /* Animated rainbow */
+  .rainbow-arc {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200%;
+    height: 500px;
+    border-radius: 50%;
+    background: transparent;
+    border: 0 solid transparent;
+    border-top: 40px solid rgba(255,107,107,0.5);
+    box-shadow:
+      0 -50px 0 rgba(255,217,61,0.5),
+      0 -100px 0 rgba(107,203,119,0.5),
+      0 -150px 0 rgba(91,200,245,0.5),
+      0 -200px 0 rgba(201,177,255,0.5);
+    animation: rainbow-glow 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes rainbow-glow {
+    0%, 100% { opacity: 0.7; }
+    50%       { opacity: 1; }
+  }
+
+  /* Grass floor */
+  .grass {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(180deg, #6BCB77 0%, #4D9A57 100%);
+    border-radius: 60% 60% 0 0 / 30px 30px 0 0;
+  }
+  .grass::before {
+    content: '';
+    position: absolute;
+    top: -20px; left: 0; right: 0;
+    height: 40px;
+    background: radial-gradient(ellipse 8px 20px at 5% 100%, #6BCB77 49%, transparent 50%),
+                radial-gradient(ellipse 8px 20px at 10% 100%, #5AB366 49%, transparent 50%),
+                radial-gradient(ellipse 8px 20px at 15% 100%, #6BCB77 49%, transparent 50%),
+                radial-gradient(ellipse 8px 20px at 20% 100%, #4D9A57 49%, transparent 50%),
+                radial-gradient(ellipse 8px 20px at 25% 100%, #6BCB77 49%, transparent 50%),
+                radial-gradient(ellipse 8px 20px at 30% 100%, #5AB366 49%, transparent 50%),
+                radial-gradient(ellipse 8px 20px at 35% 100%, #6BCB77 49%, transparent 50%),
+                radial-gradient(ellipse 8px 20px at 40% 100%, #4D9A57 49%, transparent 50%),
+                radial-gradient(ellipse 8px 20px at 45% 100%, #6BCB77 49%, transparent 50%),
+                radial-gradient(ellipse 8px 20px at 50% 100%, #5AB366 49%, transparent 50%),
+                radial-gradient(ellipse 8px 20px at 55% 100%, #6BCB77 49%, transparent 50%),
+                radial-gradient(ellipse 8px 20px at 60% 100%, #4D9A57 49%, transparent 50%),
+                radial-gradient(ellipse 8px 20px at 65% 100%, #6BCB77 49%, transparent 50%),
+                radial-gradient(ellipse 8px 20px at 70% 100%, #5AB366 49%, transparent 50%),
+                radial-gradient(ellipse 8px 20px at 75% 100%, #6BCB77 49%, transparent 50%),
+                radial-gradient(ellipse 8px 20px at 80% 100%, #4D9A57 49%, transparent 50%),
+                radial-gradient(ellipse 8px 20px at 85% 100%, #6BCB77 49%, transparent 50%),
+                radial-gradient(ellipse 8px 20px at 90% 100%, #5AB366 49%, transparent 50%),
+                radial-gradient(ellipse 8px 20px at 95% 100%, #6BCB77 49%, transparent 50%),
+                radial-gradient(ellipse 8px 20px at 100% 100%, #4D9A57 49%, transparent 50%);
+  }
+
+  /* Floating flowers */
+  .flower {
+    position: absolute;
+    font-size: 2rem;
+    animation: flower-sway 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes flower-sway {
+    0%, 100% { transform: rotate(-5deg) scale(1); }
+    50%       { transform: rotate(5deg) scale(1.1); }
+  }
+
+  .hero-content { position: relative; z-index: 2; }
+
+  .coin-mascot {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle at 35% 35%, #FFE97A, #FFD93D 50%, #F4B400 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    position: relative;
+    box-shadow:
+      0 8px 32px rgba(244,180,0,0.4),
+      inset 0 -8px 20px rgba(0,0,0,0.1),
+      0 0 0 6px rgba(255,255,255,0.6),
+      0 0 0 10px rgba(255,217,61,0.3);
+    animation: coin-bounce 2s ease-in-out infinite;
+    cursor: pointer;
+    transition: transform 0.1s;
+  }
+  .coin-mascot:active { transform: scale(0.92); }
+  @keyframes coin-bounce {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50%       { transform: translateY(-12px) rotate(2deg); }
+  }
+  .coin-face {
+    font-size: 5rem;
+    line-height: 1;
+    user-select: none;
+    animation: coin-face-blink 4s ease-in-out infinite;
+  }
+  @keyframes coin-face-blink {
+    0%, 90%, 100% { content: '😊'; }
+    95%            { transform: scaleY(0.1); }
+  }
+  .coin-leaf {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.8rem;
+    animation: leaf-wave 2s ease-in-out infinite;
+  }
+  @keyframes leaf-wave {
+    0%, 100% { transform: translateX(-50%) rotate(-10deg); }
+    50%       { transform: translateX(-50%) rotate(10deg); }
+  }
+
+  /* click pop */
+  .pop-emoji {
+    position: fixed;
+    font-size: 2rem;
+    pointer-events: none;
+    z-index: 9999;
+    animation: pop-out 0.8s ease-out forwards;
+  }
+  @keyframes pop-out {
+    0%   { transform: translateY(0) scale(0.5); opacity: 1; }
+    100% { transform: translateY(-80px) scale(1.5); opacity: 0; }
+  }
+
+  .hero-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(3rem, 10vw, 7rem);
+    line-height: 0.95;
+    background: linear-gradient(135deg, #FF6B6B, #FF8FAB, #FFD93D, #6BCB77, #5BC8F5, #C9B1FF);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 4s ease infinite, title-pop 0.8s cubic-bezier(0.34,1.56,0.64,1) both;
+    text-shadow: none;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+    margin-bottom: 0.3rem;
+  }
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50%       { background-position: 100% 50%; }
+  }
+  @keyframes title-pop {
+    from { opacity: 0; transform: scale(0.5) rotate(-5deg); }
+    to   { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+
+  .hero-sub {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    color: var(--white);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    margin-bottom: 0.5rem;
+    animation: fade-up 0.8s 0.3s ease both;
+  }
+  .hero-tagline {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: rgba(61,43,31,0.7);
+    margin-bottom: 2rem;
+    animation: fade-up 0.8s 0.5s ease both;
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    animation: fade-up 0.8s 0.7s ease both;
+  }
+
+  .btn {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.3rem;
+    padding: 0.9rem 2.5rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: transform 0.15s, box-shadow 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0);
+    transition: background 0.2s;
+    border-radius: inherit;
+  }
+  .btn:hover::after { background: rgba(255,255,255,0.15); }
+  .btn:hover { transform: translateY(-3px) scale(1.04); }
+  .btn:active { transform: scale(0.96); }
+
+  .btn-buy {
+    background: linear-gradient(135deg, #FFD93D, #F4B400);
+    color: var(--dark);
+    box-shadow: 0 6px 20px rgba(244,180,0,0.5), 0 2px 0 rgba(0,0,0,0.1) inset;
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 6px 20px rgba(244,180,0,0.5); }
+    50%       { box-shadow: 0 6px 40px rgba(244,180,0,0.9), 0 0 60px rgba(255,217,61,0.4); }
+  }
+  .btn-chart {
+    background: linear-gradient(135deg, #6BCB77, #4D9A57);
+    color: white;
+    box-shadow: 0 6px 20px rgba(77,154,87,0.4);
+  }
+  .btn-secondary {
+    background: rgba(255,255,255,0.8);
+    color: var(--text);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  /* ── CA BAR ── */
+  #ca-bar {
+    background: var(--dark);
+    padding: 0.8rem 1rem;
+    text-align: center;
+    position: relative;
+    z-index: 5;
+  }
+  .ca-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 50px;
+    padding: 0.5rem 1.2rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .ca-inner:hover { background: rgba(255,255,255,0.1); }
+  .ca-label { font-size: 0.75rem; font-weight: 800; color: var(--yellow); letter-spacing: 0.1em; text-transform: uppercase; }
+  .ca-address { font-family: 'Courier New', monospace; font-size: 0.9rem; color: rgba(255,255,255,0.8); }
+  .ca-copy { font-size: 0.8rem; color: rgba(255,255,255,0.4); transition: color 0.2s; }
+  .ca-inner:hover .ca-copy { color: var(--yellow); }
+  .ca-copied { color: var(--green) !important; }
+
+  /* ── TICKER TAPE ── */
+  .ticker-wrap {
+    background: linear-gradient(90deg, var(--yellow), #FFB347, var(--yellow));
+    overflow: hidden;
+    padding: 0.5rem 0;
+    position: relative;
+    z-index: 4;
+  }
+  .ticker-content {
+    display: flex;
+    gap: 0;
+    white-space: nowrap;
+    animation: scroll-left 20s linear infinite;
+    width: max-content;
+  }
+  .ticker-item {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    color: var(--dark);
+    padding: 0 2rem;
+  }
+  @keyframes scroll-left {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    position: relative;
+    z-index: 2;
+    padding: 5rem 2rem;
+  }
+
+  .section-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px; left: 0; right: 0;
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--rainbow1), var(--rainbow2), var(--rainbow3), var(--rainbow4), var(--rainbow5));
+  }
+
+  /* ── WHY SECTION ── */
+  #why {
+    background: linear-gradient(180deg, #F0FFF4 0%, #FFF9F0 100%);
+  }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .why-card {
+    background: white;
+    border-radius: 24px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    border: 2px solid transparent;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    cursor: default;
+  }
+  .why-card:hover {
+    transform: translateY(-8px) rotate(-1deg);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    border-color: var(--yellow);
+  }
+  .why-icon { font-size: 3rem; margin-bottom: 0.8rem; display: block; }
+  .why-card h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+  }
+  .why-card p {
+    font-size: 0.95rem;
+    color: rgba(61,43,31,0.7);
+    line-height: 1.5;
+  }
+
+  /* ── HOW TO BUY ── */
+  #how {
+    background: var(--dark);
+    color: white;
+  }
+  #how .section-title { color: var(--yellow); }
+  .steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    max-width: 900px;
+    margin: 0 auto;
+    counter-reset: steps;
+  }
+  .step {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    flex: 1 1 180px;
+    max-width: 200px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.2s, background 0.2s;
+    counter-increment: steps;
+  }
+  .step:hover {
+    transform: translateY(-6px);
+    background: rgba(255,255,255,0.1);
+  }
+  .step::before {
+    content: counter(steps);
+    position: absolute;
+    top: -16px; left: 50%;
+    transform: translateX(-50%);
+    width: 32px; height: 32px;
+    background: var(--yellow);
+    color: var(--dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(244,180,0,0.4);
+  }
+  .step-icon { font-size: 2.5rem; margin-bottom: 0.8rem; display: block; }
+  .step h3 {
+    font-family: 'Fredoka One', cursive;
+    color: var(--yellow);
+    margin-bottom: 0.4rem;
+  }
+  .step p { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+  /* ── TOKENOMICS ── */
+  #tokenomics {
+    background: linear-gradient(135deg, #FFF0F8 0%, #F0F8FF 100%);
+  }
+  .toke-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .toke-card {
+    border-radius: 20px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    font-family: 'Fredoka One', cursive;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .toke-card:hover { transform: scale(1.05) rotate(1deg); }
+  .toke-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.15;
+    background: repeating-linear-gradient(45deg, white 0, white 2px, transparent 0, transparent 50%);
+    background-size: 10px 10px;
+  }
+  .toke-card .num {
+    font-size: 2.2rem;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .toke-card .label {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .toke-a { background: var(--yellow); color: var(--dark); }
+  .toke-b { background: var(--green); color: white; }
+  .toke-c { background: var(--pink); color: white; }
+  .toke-d { background: var(--sky-dark); color: white; }
+
+  /* ── COMMUNITY ── */
+  #community {
+    background: linear-gradient(180deg, #1A1A2E 0%, #0D1B2A 100%);
+    text-align: center;
+    color: white;
+  }
+  #community .section-title { color: white; }
+  .social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  .social-btn {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .social-btn:hover { transform: translateY(-4px); }
+  .social-twitter { background: #1DA1F2; color: white; box-shadow: 0 4px 20px rgba(29,161,242,0.4); }
+  .social-telegram { background: #229ED9; color: white; box-shadow: 0 4px 20px rgba(34,158,217,0.4); }
+  .social-pumpfun { background: linear-gradient(135deg, var(--yellow), #FFB347); color: var(--dark); box-shadow: 0 4px 20px rgba(255,183,71,0.4); }
+
+  .manifesto {
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0D1B2A;
+    padding: 2rem;
+    text-align: center;
+    color: rgba(255,255,255,0.3);
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  footer a { color: var(--yellow); text-decoration: none; }
+
+  /* ── INTERACTIVE GARDEN ── */
+  #garden-canvas {
+    width: 100%;
+    height: 120px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: linear-gradient(180deg, #D4F5C4, #A8E6A0);
+  }
+  #garden-canvas .garden-hint {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    color: rgba(77,154,87,0.7);
+    pointer-events: none;
+    animation: hint-pulse 2s ease-in-out infinite;
+  }
+  @keyframes hint-pulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50%       { opacity: 1;   transform: scale(1.05); }
+  }
+  .garden-plant {
+    position: absolute;
+    bottom: 0;
+    font-size: 2rem;
+    animation: plant-grow 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+    pointer-events: none;
+    user-select: none;
+  }
+  @keyframes plant-grow {
+    from { transform: scale(0) translateY(20px); opacity: 0; }
+    to   { transform: scale(1) translateY(0);     opacity: 1; }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(20px);
+    background: rgba(255,254,247,0.8);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    transition: background 0.3s;
+  }
+  .nav-logo {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+    background: linear-gradient(90deg, #FFD93D, #FF8FAB, #6BCB77);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+  .nav-links a {
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: var(--text);
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--yellow-dark); }
+  .nav-buy {
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.95rem;
+    padding: 0.5rem 1.4rem;
+    background: linear-gradient(135deg, #FFD93D, #F4B400);
+    color: var(--dark);
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(244,180,0,0.4);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .nav-buy:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(244,180,0,0.6); }
+
+  /* mobile nav */
+  @media (max-width: 600px) {
+    .nav-links a { display: none; }
+    .coin-mascot { width: 150px; height: 150px; }
+    .coin-face { font-size: 3.5rem; }
+  }
+
+  /* ── PRICE TICKER (fun fake) ── */
+  .price-display {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0,0,0,0.08);
+    border-radius: 50px;
+    padding: 0.4rem 1rem;
+    margin-top: 1rem;
+    font-family: 'Fredoka One', cursive;
+    animation: fade-up 0.8s 0.9s ease both;
+  }
+  .price-val { font-size: 1.2rem; color: var(--green-dark); }
+  .price-up { color: var(--green-dark); font-size: 0.9rem; }
+
+  /* confetti on buy click */
+  .confetti-piece {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 2px;
+    animation: confetti-fall 1.2s ease-out forwards;
+  }
+  @keyframes confetti-fall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PARTICLES -->
+<div id="particles"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">🌱 MSCOPE</div>
+  <div class="nav-links">
+    <a href="#why">Why</a>
+    <a href="#how">How to Buy</a>
+    <a href="#tokenomics">Tokenomics</a>
+    <a href="#community">Community</a>
+    <a id="nav-buy-btn" href="#" class="nav-buy">🛒 Buy Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="rainbow-arc"></div>
+  <div class="grass"></div>
+
+  <!-- Scattered flowers -->
+  <span class="flower" style="left:5%;bottom:100px;animation-delay:0s">🌸</span>
+  <span class="flower" style="left:12%;bottom:90px;animation-delay:0.5s">🌼</span>
+  <span class="flower" style="left:85%;bottom:110px;animation-delay:0.3s">🌺</span>
+  <span class="flower" style="left:90%;bottom:95px;animation-delay:0.8s">🌸</span>
+  <span class="flower" style="left:75%;bottom:85px;animation-delay:1.1s">🌻</span>
+  <span class="flower" style="left:20%;bottom:80px;animation-delay:0.6s">🌷</span>
+  <span class="flower" style="left:3%;bottom:130px;font-size:1.2rem;animation-delay:1.4s">🦋</span>
+  <span class="flower" style="right:8%;bottom:140px;font-size:1.2rem;animation-delay:0.9s">🐦</span>
+
+  <div class="hero-content">
+    <!-- Coin mascot -->
+    <div class="coin-mascot" id="mascot" title="Click me!">
+      <span class="coin-leaf">🌿</span>
+      <span class="coin-face">😊</span>
+    </div>
+
+    <h1 class="hero-title">MEMESCOPE<br>MONDAY</h1>
+    <p class="hero-sub">🌱 The Beginner-Friendly Memecoin 🌱</p>
+    <p class="hero-tagline">No jargon. No gatekeeping. Just vibes & gains.</p>
+
+    <div class="price-display">
+      <span>💰</span>
+      <span class="price-val" id="ticker-sym">$MSCOPE</span>
+      <span class="price-up" id="price-chng">🚀 TO THE MOON</span>
+    </div>
+    <br><br>
+
+    <div class="cta-group">
+      <a id="buy-btn" href="#" class="btn btn-buy">🛒 Buy on Pump.fun</a>
+      <a id="chart-btn" href="#" class="btn btn-chart">📈 View Chart</a>
+      <a href="#how" class="btn btn-secondary">🗺️ How to Buy</a>
+    </div>
+  </div>
+</section>
+
+<!-- CA BAR -->
+<div id="ca-bar">
+  <div class="ca-inner" id="ca-copy-btn" title="Click to copy">
+    <span class="ca-label">CA</span>
+    <span class="ca-address" id="ca-display">COMING SOON</span>
+    <span class="ca-copy" id="ca-copy-label">📋 copy</span>
+  </div>
+</div>
+
+<!-- TICKER TAPE -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-content" id="ticker">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- INTERACTIVE GARDEN -->
+<div id="garden-canvas">
+  <div class="garden-hint">🌱 Click anywhere to plant a flower!</div>
+</div>
+
+<!-- WHY SECTION -->
+<section id="why">
+  <h2 class="section-title reveal">Why Memescope Monday? 🌸</h2>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <span class="why-icon">🐣</span>
+      <h3>Beginner Friendly</h3>
+      <p>Never bought a memecoin before? Perfect. We made this just for you. Step-by-step, hand-holding, zero cringe.</p>
+    </div>
+    <div class="why-card reveal">
+      <span class="why-icon">🔍</span>
+      <h3>Powered by Memescope</h3>
+      <p>Discover the hottest new tokens before they moon. MSCOPE is the vibes token of the Memescope community.</p>
+    </div>
+    <div class="why-card reveal">
+      <span class="why-icon">🌈</span>
+      <h3>Pure Good Energy</h3>
+      <p>No FUD, no toxic CT, just wholesome kawaii coin energy and a community that actually helps each other.</p>
+    </div>
+    <div class="why-card reveal">
+      <span class="why-icon">🚀</span>
+      <h3>Pump.fun Native</h3>
+      <p>Launched fair on pump.fun — no VC bags, no pre-sale, no team allocation. Community owns this thing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO BUY -->
+<section id="how">
+  <h2 class="section-title reveal">How to Buy 🛒</h2>
+  <div class="steps">
+    <div class="step reveal">
+      <span class="step-icon">👛</span>
+      <h3>Get a Wallet</h3>
+      <p>Download Phantom or Solflare wallet on your phone or browser.</p>
+    </div>
+    <div class="step reveal">
+      <span class="step-icon">💸</span>
+      <h3>Get Some SOL</h3>
+      <p>Buy SOL on Coinbase, Binance, or Kraken and send to your wallet.</p>
+    </div>
+    <div class="step reveal">
+      <span class="step-icon">🌐</span>
+      <h3>Go to Pump.fun</h3>
+      <p>Head to pump.fun and search for MSCOPE or paste the contract address.</p>
+    </div>
+    <div class="step reveal">
+      <span class="step-icon">🛒</span>
+      <h3>Buy & Hold</h3>
+      <p>Swap your SOL for $MSCOPE and join the garden! WAGMI 🌱</p>
+    </div>
+    <div class="step reveal">
+      <span class="step-icon">🎉</span>
+      <h3>Celebrate!</h3>
+      <p>Welcome to the Memescope Monday family. Now share it with everyone!</p>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:3rem">
+    <a id="how-buy-btn" href="#" class="btn btn-buy" style="font-size:1.5rem;padding:1.1rem 3rem">
+      🛒 Buy $MSCOPE Now
+    </a>
+  </div>
+</section>
+
+<!-- TOKENOMICS -->
+<section id="tokenomics">
+  <h2 class="section-title reveal">Tokenomics 🌻</h2>
+  <div class="toke-grid reveal">
+    <div class="toke-card toke-a">
+      <span class="num">100%</span>
+      <span class="label">Community</span>
+    </div>
+    <div class="toke-card toke-b">
+      <span class="num">0%</span>
+      <span class="label">Team Alloc</span>
+    </div>
+    <div class="toke-card toke-c">
+      <span class="num">0%</span>
+      <span class="label">VC / Presale</span>
+    </div>
+    <div class="toke-card toke-d">
+      <span class="num">1B</span>
+      <span class="label">Total Supply</span>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:2rem;max-width:500px;margin-left:auto;margin-right:auto;color:rgba(61,43,31,0.6);line-height:1.7;font-weight:700">
+    Fair launch on pump.fun. No pre-sale, no dev wallet, no BS. The tokens are yours from day one. 🌱
+  </p>
+</section>
+
+<!-- COMMUNITY -->
+<section id="community">
+  <h2 class="section-title reveal">Join the Garden 🌸</h2>
+  <p class="manifesto reveal">
+    Every Monday is Memescope Monday. We scan, we ape (carefully), we learn, we laugh, and we grow together.
+    This coin is for the curious, the beginners, the FOMO-havers who just want to be included.
+    <br><br>
+    You belong here. 🌈
+  </p>
+  <div class="social-links reveal">
+    <a id="community-twitter" href="#" class="social-btn social-twitter">𝕏 Twitter / X</a>
+    <a id="community-telegram" href="#" class="social-btn social-telegram">✈️ Telegram</a>
+    <a id="community-pump" href="#" class="social-btn social-pumpfun">🚀 Pump.fun</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>🌱 <strong>$MSCOPE — Memescope Monday</strong> — For entertainment purposes. Not financial advice. Do your own research. Crypto is risky.</p>
+  <p style="margin-top:0.5rem">Built with 💛 by <a href="https://learnlabmedia.com" target="_blank">LearnLab Media</a></p>
+</footer>
+
+<script>
+// ── Apply config ──
+document.querySelectorAll('#buy-btn, #nav-buy-btn, #how-buy-btn').forEach(el => {
+  el.href = CONFIG.BUY_LINK;
+  el.target = '_blank';
+  el.rel = 'noopener';
+});
+document.getElementById('chart-btn').href = CONFIG.CHART_LINK;
+document.getElementById('community-twitter').href = CONFIG.TWITTER_LINK;
+document.getElementById('community-telegram').href = CONFIG.TELEGRAM_LINK;
+document.getElementById('community-pump').href = CONFIG.BUY_LINK;
+document.getElementById('community-pump').target = '_blank';
+
+document.getElementById('ca-display').textContent = CONFIG.CONTRACT_ADDRESS;
+document.getElementById('ticker-sym').textContent = CONFIG.TICKER;
+
+// ── Ticker tape ──
+const tickerItems = [
+  `🌱 ${CONFIG.TICKER}`, '🚀 TO THE MOON', '🌸 BEGINNER FRIENDLY',
+  '💛 MEMESCOPE MONDAY', '🌈 WAGMI', '🐣 FAIR LAUNCH',
+  '🌻 COMMUNITY OWNED', '🔍 SCAN & APE', '🌼 PUMP.FUN',
+];
+const tickerEl = document.getElementById('ticker');
+// duplicate for seamless loop
+const allItems = [...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems];
+allItems.forEach(item => {
+  const span = document.createElement('span');
+  span.className = 'ticker-item';
+  span.textContent = item;
+  tickerEl.appendChild(span);
+});
+
+// ── CA copy ──
+document.getElementById('ca-copy-btn').addEventListener('click', () => {
+  if (CONFIG.CONTRACT_ADDRESS === 'COMING SOON') return;
+  navigator.clipboard.writeText(CONFIG.CONTRACT_ADDRESS).then(() => {
+    const label = document.getElementById('ca-copy-label');
+    label.textContent = '✅ copied!';
+    label.classList.add('ca-copied');
+    setTimeout(() => {
+      label.textContent = '📋 copy';
+      label.classList.remove('ca-copied');
+    }, 2000);
+  });
+});
+
+// ── Particles ──
+const particlesEl = document.getElementById('particles');
+const particleEmojis = ['🌸','🌼','⭐','💛','🍀','🌺','🦋','🌟','💫','🌈','✨'];
+for (let i = 0; i < 25; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const size = Math.random() * 20 + 10;
+  p.style.cssText = `
+    left: ${Math.random()*100}%;
+    width: ${size}px; height: ${size}px;
+    animation-duration: ${Math.random()*15+10}s;
+    animation-delay: ${Math.random()*15}s;
+    font-size: ${size * 0.8}px;
+    background: transparent;
+  `;
+  p.textContent = particleEmojis[Math.floor(Math.random()*particleEmojis.length)];
+  p.style.fontSize = size + 'px';
+  p.style.background = 'transparent';
+  p.style.width = 'auto';
+  p.style.height = 'auto';
+  particlesEl.appendChild(p);
+}
+
+// ── Mascot click pop ──
+const mascot = document.getElementById('mascot');
+const popEmojis = ['💰','🌟','✨','🚀','🌸','💛','🌈','🎉','💎','🔥'];
+mascot.addEventListener('click', (e) => {
+  for (let i = 0; i < 5; i++) {
+    const em = document.createElement('div');
+    em.className = 'pop-emoji';
+    em.textContent = popEmojis[Math.floor(Math.random()*popEmojis.length)];
+    em.style.left = (e.clientX + (Math.random()-0.5)*60) + 'px';
+    em.style.top = (e.clientY + (Math.random()-0.5)*30) + 'px';
+    em.style.animationDelay = (Math.random()*0.3) + 's';
+    document.body.appendChild(em);
+    setTimeout(() => em.remove(), 1000);
+  }
+});
+
+// ── Buy button confetti ──
+function launchConfetti(x, y) {
+  const colors = ['#FFD93D','#FF8FAB','#6BCB77','#5BC8F5','#C9B1FF','#FF6B6B'];
+  for (let i = 0; i < 40; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti-piece';
+    c.style.cssText = `
+      left: ${x + (Math.random()-0.5)*200}px;
+      top: ${y}px;
+      background: ${colors[Math.floor(Math.random()*colors.length)]};
+      transform: rotate(${Math.random()*360}deg);
+      animation-duration: ${0.8 + Math.random()*0.8}s;
+      animation-delay: ${Math.random()*0.3}s;
+    `;
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 2000);
+  }
+}
+document.querySelectorAll('#buy-btn, #how-buy-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    launchConfetti(e.clientX, e.clientY);
+  });
+});
+
+// ── Interactive garden ──
+const garden = document.getElementById('garden-canvas');
+const gardenPlants = ['🌸','🌼','🌺','🌻','🌷','🌱','🍀','🌿','🌾','🦋','🐝','🐞'];
+let plantCount = 0;
+garden.addEventListener('click', (e) => {
+  if (plantCount > 50) { garden.innerHTML = '<div class="garden-hint">🌸 Garden is full! Refresh to reset.</div>'; return; }
+  const rect = garden.getBoundingClientRect();
+  const plant = document.createElement('div');
+  plant.className = 'garden-plant';
+  plant.textContent = gardenPlants[Math.floor(Math.random()*gardenPlants.length)];
+  plant.style.left = (e.clientX - rect.left - 16) + 'px';
+  plant.style.fontSize = (1.5 + Math.random()*1.5) + 'rem';
+  garden.appendChild(plant);
+  plantCount++;
+});
+
+// ── Scroll reveal ──
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => observer.observe(el));
+
+// ── Mascot face blink ──
+let blinking = false;
+setInterval(() => {
+  if (blinking) return;
+  blinking = true;
+  const face = mascot.querySelector('.coin-face');
+  face.textContent = '😑';
+  setTimeout(() => { face.textContent = '😊'; blinking = false; }, 200);
+}, 3000 + Math.random()*2000);
+</script>
+</body>
+</html>
